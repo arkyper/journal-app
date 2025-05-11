@@ -8,6 +8,10 @@
     pkgs.zulu17
     pkgs.maven
   ];
+  services.mongodb = {
+    enable = true;
+    port = 27017;
+  };
   # Sets environment variables in the workspace
   env = {};
   idx = {
