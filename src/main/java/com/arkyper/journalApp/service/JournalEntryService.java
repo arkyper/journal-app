@@ -1,6 +1,8 @@
 package com.arkyper.journalApp.service;
 
+import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Optional;
 
 import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,34 +11,31 @@ import org.springframework.stereotype.Service;
 import com.arkyper.journalApp.entity.JournalEntry;
 import com.arkyper.journalApp.repository.JournalEntryRepository;
 
+import lombok.extern.slf4j.Slf4j;
+
 @Service
+@Slf4j
 public class JournalEntryService {
     
     @Autowired
     private JournalEntryRepository journalEntryRepository;
 
     public void saveEntry(JournalEntry journalEntry) {
-        journalEntryRepository.save(journalEntry);
+        try {
+            journalEntry.setDate(LocalDateTime.now());
+            journalEntryRepository.save(journalEntry);
+        } catch (Exception e) {
+            log.error("Exception ", e);
+        }
     }
 
     public List<JournalEntry> getAll() {
         return journalEntryRepository.findAll();
     }
 
-    public JournalEntry getEntryById(ObjectId id) {
-        return journalEntryRepository.findById(id).orElse(null);
+    public Optional<JournalEntry> findById(ObjectId id) {
+        return journalEntryRepository.findById(id);
     }
-
-    // public JournalEntry updateEntryById(ObjectId id, JournalEntry newEntry) {
-    //     JournalEntry oldEntry = journalEntryRepository.findById(id).orElse(null);
-    //     if (oldEntry != null) {
-    //         oldEntry.setTitle(newEntry.getTitle() != null && newEntry.getTitle().equals("") ? newEntry.getTitle() : oldEntry.getTitle());
-    //         oldEntry.setContent(newEntry.getContent() != null && newEntry.getContent().equals("") ? newEntry.getContent() : oldEntry.getContent());
-                   
-    //     }
-    //     journalEntryRepository.save(oldEntry);
-    //     return oldEntry;
-    // }
 
     public void deleteEntryById(ObjectId id) {
         journalEntryRepository.deleteById(id);
