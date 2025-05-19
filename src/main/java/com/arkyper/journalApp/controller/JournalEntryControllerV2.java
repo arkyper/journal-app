@@ -2,7 +2,6 @@ package com.arkyper.journalApp.controller;
 
 import java.util.List;
 import java.util.Optional;
-
 import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -40,7 +39,7 @@ public class JournalEntryControllerV2 {
         else
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
-
+    
     @PostMapping("{userName}")
     public ResponseEntity<?> createEntry(@RequestBody JournalEntry myEntry, @PathVariable String userName) {
        try {

@@ -7,6 +7,7 @@ import java.util.Optional;
 import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.arkyper.journalApp.entity.JournalEntry;
 import com.arkyper.journalApp.entity.User;
@@ -24,6 +25,8 @@ public class JournalEntryService {
     @Autowired
     private UserService userService;
 
+    // @Transactional - ensures that each step gets executed successfully if any step fails then it'll rollback previous execution
+    @Transactional
     public void saveEntry(JournalEntry journalEntry, String userName) {
         try {
             User user = userService.findByUserName(userName);

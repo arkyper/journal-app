@@ -35,3 +35,10 @@ HTTP STATUS Codes
 -500 Internal Server Error - A generic error message indicating that something went wrong on the server, and the server could not handle the request.
 -502 Bad Gateway - The server acting as a gateway or proxy received an invalid response from an upstream server.
 -503 Service Unavailable - The server is temporarily unable to handle the request due to maintenance or overload.
+
+
+MOONGO DB Atlas CLuster Username & Password
+username - saurabh
+password - GBfbL9KWW3u1wIdO
+
+connection String - mongodb+srv://saurabh:GBfbL9KWW3u1wIdO@cluster0.ezxedtn.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0
