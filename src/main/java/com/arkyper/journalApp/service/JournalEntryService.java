@@ -18,14 +18,15 @@ import lombok.extern.slf4j.Slf4j;
 @Service
 @Slf4j
 public class JournalEntryService {
-    
+
     @Autowired
     private JournalEntryRepository journalEntryRepository;
 
     @Autowired
     private UserService userService;
 
-    // @Transactional - ensures that each step gets executed successfully if any step fails then it'll rollback previous execution
+    // @Transactional - ensures that each step gets executed successfully if any
+    // step fails then it'll rollback previous execution
     @Transactional
     public void saveEntry(JournalEntry journalEntry, String userName) {
         try {
@@ -33,7 +34,7 @@ public class JournalEntryService {
             journalEntry.setDate(LocalDateTime.now());
             JournalEntry savedEntry = journalEntryRepository.save(journalEntry);
             user.getJournalEntries().add(savedEntry);
-            userService.saveUser(user);
+            userService.saveNewUser(user);
         } catch (Exception e) {
             log.error("Exception ", e);
         }
@@ -55,10 +56,22 @@ public class JournalEntryService {
         return journalEntryRepository.findById(id);
     }
 
-    public void deleteEntryById(ObjectId id, String userName) {
-        User user = userService.findByUserName(userName);
-        user.getJournalEntries().removeIf(entry -> entry.getId().equals(id));
-        userService.saveUser(user);
-        journalEntryRepository.deleteById(id);
+    @Transactional
+    public boolean deleteEntryById(ObjectId id, String userName) {
+        boolean ifRemoved = false;
+        try {
+            User user = userService.findByUserName(userName);
+            ifRemoved = user.getJournalEntries().removeIf(entry -> entry.getId().equals(id));
+            if(ifRemoved) {
+                userService.saveNewUser(user);
+                journalEntryRepository.deleteById(id);
+            }    
+        } catch(Exception e) {
+            System.out.println(e);
+            throw new RuntimeException("An Error occurred while deleting the entry.", e);
+        }
+        return ifRemoved;
     }
+
+    
 }

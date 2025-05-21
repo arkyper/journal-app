@@ -11,10 +11,14 @@ import org.springframework.data.mongodb.core.mapping.Document;
 
 import com.mongodb.lang.NonNull;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Data
 @Document(collection = "users")
+@AllArgsConstructor
+@NoArgsConstructor
 public class User {
     
     @Id

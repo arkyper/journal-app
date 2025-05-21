@@ -1,0 +1,18 @@
+# spring.application.name=demo
+# server.port=${PORT:8080}
+# spring.devtools.restart.enabled=true
+# spring.devtools.livereload.enabled=true
+
+
+# spring:
+#   data:
+#     mongodb:
+#       uri: mongodb+srv://saurabh:GBfbL9KWW3u1wIdO@cluster0.ezxedtn.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0
+#       port:27017
+#       database: journaldb
+#       auto-index-creation: true
+      
+# server:
+#   servlet:
+#   context-path: /journal-app
+

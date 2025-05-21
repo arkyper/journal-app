@@ -52,4 +52,10 @@ public class UserService {
     public void deleteByUserName(String userName) {
         userRepository.deleteByUserName(userName);
     }
+
+    public void saveNewAdmin(User user) {
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
+        user.setRoles(List.of("USER", "ADMIN"));
+        userRepository.save(user);
+    }
 }
