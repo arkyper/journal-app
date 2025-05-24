@@ -37,7 +37,7 @@ HTTP STATUS Codes
 -503 Service Unavailable - The server is temporarily unable to handle the request due to maintenance or overload.
 
 
-MOONGO DB Atlas CLuster Username & Password
+MOONGO DB Atlas Cluster Username & Password
 username - saurabh
 password - GBfbL9KWW3u1wIdO
 

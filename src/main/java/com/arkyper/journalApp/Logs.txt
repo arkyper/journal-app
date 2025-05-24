@@ -1,0 +1,19 @@
+SpringBoot supports various logging frameworks such as Logback, Log4j2 and Java Util Logging (JUL)
+
+- Logback: A popular logging framework that servers as the default in many Spring Boot applications. It offers a flexible configuration and good performance.
+
+- Log4j2: Another widely used logging framework with features such as asynchronous logging and support for various output formats.
+
+- Java Util Logging (JUL): The default framework included in Java Standard Edition. While it's less features-rich than some third-party framworks, it is straightforward and is part of the Java platform.
+
+--> If you want to customize the logging configuration, you can create your own logback-spring.xml or logback.xml file in the src/main/resources directory. When Spring Boot detects this file in your project, it will use it instead of the default configuration.
+
+--> LOGGER LEVELS 
+- TRACE
+- DEBUG
+- INFO
+- WARN
+- ERROR
+
+---> SPRING BOOT provided annotations Slf4j & Log4j2 that you can use to automatically inject logger instances into your classes.
+
