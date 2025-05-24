@@ -1,0 +1,48 @@
+<configuration>
+    <appender name="myConsoleAppender" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n</pattern>
+        </encoder>
+    </appender>
+
+    <!-- <appender name="myFileAppender" class="ch.qos.logback.core.FileAppender">
+        <encoder>
+            <pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n</pattern>
+        </encoder>
+        <file>
+            journalApp.log
+        </file>
+    </appender> -->
+
+    <appender name="myFileAppender" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>
+            journalApp.log
+        </file>
+
+        <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+            <!--  -->
+            <fileNamePattern>journalApp-%d{yyyy-MM-dd_HH-mm}.%i.log</fileNamePattern>
+
+            <!-- Create new file when current reaches Max Size to 10MB -->
+            <maxFileSize>10MB</maxFileSize>
+
+            <!-- Delete old files when it reaches Max History to 10 -->
+            <maxHistory>10</maxHistory>
+        </rollingPolicy>
+
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <timeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy$TimeBasedFileNamingAndTriggeringPolicy">
+        </rollingPolicy>
+        
+        <encoder>
+            <pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n</pattern>
+        </encoder>
+        
+    </appender>
+
+    <root level="INFO">
+        <appender-ref ref="myConsoleAppender"/>
+        <appender-ref ref="myFileAppender"/>
+    </root>
+    </root>
+</configuration>

@@ -25,6 +25,7 @@ public class JournalEntryService {
     @Autowired
     private UserService userService;
 
+
     // @Transactional - ensures that each step gets executed successfully if any
     // step fails then it'll rollback previous execution
     @Transactional

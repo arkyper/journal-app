@@ -49,11 +49,8 @@ class JournalEntryControllerV2Test {
         List<JournalEntry> entries = new ArrayList<>();
         entries.add(new JournalEntry());
         user.setJournalEntries(entries);
-
         when(userService.findByUserName("testuser")).thenReturn(user);
-
         ResponseEntity<?> response = journalEntryController.getAllJournalEntriesOfUser();
-
         assertEquals(HttpStatus.OK, response.getStatusCode());
         assertEquals(entries, response.getBody());
     }
