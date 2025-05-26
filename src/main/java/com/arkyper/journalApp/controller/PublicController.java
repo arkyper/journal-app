@@ -9,7 +9,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.arkyper.journalApp.cache.AppCache;
 import com.arkyper.journalApp.entity.User;
+import com.arkyper.journalApp.service.QuotesService;
 import com.arkyper.journalApp.service.UserService;
 
 @RestController
@@ -18,6 +20,12 @@ public class PublicController {
     
     @Autowired
     private UserService userService;
+
+    @Autowired
+    private QuotesService quotesService;
+
+    @Autowired
+    private AppCache appCache;
 
     @GetMapping("/health-check")
     public String healthCheck() {
@@ -32,5 +40,17 @@ public class PublicController {
         } catch(Exception e) {
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         } 
+    }
+
+    
+    @GetMapping
+    public ResponseEntity<?> greeting() {
+        String quote = quotesService.getQuote().get(0).getQuote();
+        return new ResponseEntity<>("Hi " + "Saurabh " + quote, HttpStatus.OK);
+    }
+
+    @GetMapping("/clear-cache")
+    public void clearAppCache() {
+        appCache.init();
     }
 }

@@ -42,3 +42,5 @@ username - saurabh
 password - GBfbL9KWW3u1wIdO
 
 connection String - mongodb+srv://saurabh:GBfbL9KWW3u1wIdO@cluster0.ezxedtn.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0
+
+API KEY: sqZMPXWcpbMcDFmAeqnqYw==8D98fvMUSrLbeAdK
