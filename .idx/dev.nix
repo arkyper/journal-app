@@ -7,10 +7,15 @@
   packages = [
     pkgs.zulu17
     pkgs.maven
+    pkgs.redis
   ];
   services.mongodb = {
     enable = true;
     port = 27017;
+  };
+  services.redis = { # Add this block for Redis service
+    enable = true;
+    port = 6379;
   };
   # Sets environment variables in the workspace
   env = {};
