@@ -30,7 +30,11 @@ public class User {
 
     @NonNull
     private String password;
+    
+    private String email;
 
+    private boolean isSentimentAnalysis;
+    
     @DBRef
     private List<JournalEntry> journalEntries = new ArrayList<>();
 
