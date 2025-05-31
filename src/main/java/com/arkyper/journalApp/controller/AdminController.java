@@ -14,14 +14,19 @@ import org.springframework.web.bind.annotation.RestController;
 import com.arkyper.journalApp.entity.User;
 import com.arkyper.journalApp.service.UserService;
 
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
+
 @RestController
 @RequestMapping("/admin")
+@Tag(name = "Admin APIs", description = "Get all Users, Create Admin User")
 public class AdminController {
 
     @Autowired
     private UserService userService;
 
     @GetMapping("/all-users")
+    @Operation(summary = "Get all Users", description = "Get all Users")
     public ResponseEntity<?> getAllUsers() {
         List<User> allUsers = userService.getAll();
         if (!allUsers.isEmpty() && allUsers != null)
@@ -31,6 +36,7 @@ public class AdminController {
     }
 
     @PostMapping("/create-admin-user")
+    @Operation(summary = "Create Admin User", description = "Create Admin User")
     public ResponseEntity<?> createAdminUser(@RequestBody User user) {
         try {
             userService.saveNewAdmin(user);

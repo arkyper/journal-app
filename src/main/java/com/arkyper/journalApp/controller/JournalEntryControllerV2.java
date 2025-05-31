@@ -21,8 +21,12 @@ import com.arkyper.journalApp.entity.User;
 import com.arkyper.journalApp.service.JournalEntryService;
 import com.arkyper.journalApp.service.UserService;
 
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
+
 @RestController
 @RequestMapping("/journal")
+@Tag(name = "Journal-V2 APIs", description = "Get all Entry of User, Create Entry, Get Entry By Id, Update Entry, Delete Entry")
 public class JournalEntryControllerV2 {
     
     @Autowired 
@@ -32,6 +36,7 @@ public class JournalEntryControllerV2 {
     private UserService userService;
     
     @GetMapping
+    @Operation(summary = "Get all Journal Entries of User", description = "Get all Journal Entries of User")
     public ResponseEntity<?> getAllJournalEntriesOfUser() {
         String userName = SecurityContextHolder.getContext().getAuthentication().getName();
 
@@ -47,6 +52,7 @@ public class JournalEntryControllerV2 {
     }
     
     @PostMapping
+    @Operation(summary = "Create Journal Entry", description = "Create Journal Entry")
     public ResponseEntity<?> createEntry(@RequestBody JournalEntry myEntry) {
         String userName = SecurityContextHolder.getContext().getAuthentication().getName();
 
@@ -59,7 +65,9 @@ public class JournalEntryControllerV2 {
     }
 
     @GetMapping("/id/{myId}")
-    public ResponseEntity<?> getJournalEntryById(@PathVariable ObjectId myId) {
+    @Operation(summary = "Get Journal Entry By Id", description = "Get Journal Entry By Id")
+    public ResponseEntity<?> getJournalEntryById(@PathVariable String id) {
+        ObjectId myId = new ObjectId(id);
         String userName = SecurityContextHolder.getContext().getAuthentication().getName();
 
         User user = userService.findByUserName(userName);
@@ -76,7 +84,9 @@ public class JournalEntryControllerV2 {
     }
 
     @PutMapping("/id/{myId}")
-    public ResponseEntity<?> updateEntry(@PathVariable ObjectId myId, @RequestBody JournalEntry newEntry) {
+    @Operation(summary = "Update Journal Entry By Id", description = "Update Journal Entry By Id")
+    public ResponseEntity<?> updateEntry(@PathVariable String id, @RequestBody JournalEntry newEntry) {
+        ObjectId myId = new ObjectId(id);
         String userName = SecurityContextHolder.getContext().getAuthentication().getName();
         
         User user = userService.findByUserName(userName);
@@ -95,6 +105,7 @@ public class JournalEntryControllerV2 {
     }
 
     @DeleteMapping("/id/{myId}")
+    @Operation(summary = "Delete Journal Entry By Id", description = "Delete Journal Entry By Id")
     public ResponseEntity<?> deleteEntry(@PathVariable ObjectId myId) {
         String userName = SecurityContextHolder.getContext().getAuthentication().getName();
 
