@@ -16,14 +16,19 @@ import org.springframework.web.bind.annotation.RestController;
 import com.arkyper.journalApp.entity.User;
 import com.arkyper.journalApp.service.UserService;
 
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
+
 @RestController
 @RequestMapping("/user")
+@Tag(name = "User APIs", description = "Read, Update and Delete User")
 public class UserController {
     
     @Autowired 
     private UserService userService;
 
     @GetMapping
+    @Operation(summary = "Get User By UserName", description = "Get User By UserName")
     public ResponseEntity<?> getUserByUserName(@PathVariable String userName) {
         Optional<User> user = Optional.ofNullable(userService.findByUserName(userName));
         if(user.isPresent())
@@ -33,6 +38,7 @@ public class UserController {
     }
 
     @PutMapping
+    @Operation(summary = "Update User", description = "Update User")
     public ResponseEntity<?> updateUser(@RequestBody User user) {
         String userName = SecurityContextHolder.getContext().getAuthentication().getName();
         
@@ -45,6 +51,7 @@ public class UserController {
     }
 
     @DeleteMapping
+    @Operation(summary = "Delete User", description = "Delete User")
     public ResponseEntity<?> deleteUser() {
         String userName = SecurityContextHolder.getContext().getAuthentication().getName();
 
